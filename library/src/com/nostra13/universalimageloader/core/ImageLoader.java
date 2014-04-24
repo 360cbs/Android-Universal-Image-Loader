@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
+import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiscCache;
 import com.nostra13.universalimageloader.cache.memory.MemoryCache;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.FlushedInputStream;
@@ -579,6 +580,16 @@ public class ImageLoader {
 		checkConfiguration();
 		return configuration.memoryCache;
 	}
+
+    public long getDiskCacheSize() {
+        checkConfiguration();
+        if (configuration.diskCache instanceof LruDiscCache) {
+            LruDiscCache ldc = (LruDiscCache) configuration.diskCache;
+            return ldc.size();
+        } else {
+            return 0;
+        }
+    }
 
 	/**
 	 * Clears memory cache
