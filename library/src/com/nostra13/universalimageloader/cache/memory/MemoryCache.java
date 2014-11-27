@@ -17,11 +17,30 @@ package com.nostra13.universalimageloader.cache.memory;
 
 import android.graphics.Bitmap;
 
+import java.util.Set;
+
 /**
  * Interface for memory cache
  *
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
  * @since 1.9.2
  */
-public interface MemoryCache extends MemoryCacheAware<String, Bitmap> {
+public interface MemoryCache {
+	/** Returns value by key. If there is no value for key then null will be returned. */
+	Bitmap get(String key);
+
+	/** Puts value into cache by key */
+	void put(String key, Bitmap value);
+
+	/** Returns the current size of the cache in bytes. */
+	int size();
+
+	/** Removes item by key */
+	Bitmap remove(String key);
+
+	/** Returns all keys of cache */
+	Set<String> keys();
+
+	/** Remove all items from cache */
+	void clear();
 }
